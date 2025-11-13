@@ -1,0 +1,137 @@
+/**
+ * AI Realty Autogen - Admin CSS
+ * Styles for the WordPress admin dashboard
+ */
+
+/* Admin layout improvements */
+.ai-realty-dashboard,
+.ai-realty-settings,
+.ai-realty-leads,
+.ai-realty-agents {
+    margin: 20px 20px 0 0;
+}
+
+/* Card styles are inline in templates for portability */
+
+/* Additional helper styles */
+.ai-realty-section {
+    margin-bottom: 30px;
+}
+
+.ai-realty-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.ai-realty-flex {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.ai-realty-text-center {
+    text-align: center;
+}
+
+.ai-realty-mt-20 {
+    margin-top: 20px;
+}
+
+.ai-realty-mb-20 {
+    margin-bottom: 20px;
+}
+
+/* Loading spinner */
+.ai-realty-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: #2271b1;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Success/Error messages */
+.ai-realty-message {
+    padding: 12px;
+    border-left: 4px solid;
+    margin: 15px 0;
+    background: white;
+}
+
+.ai-realty-message.success {
+    border-left-color: #00a32a;
+    background: #f0f6fc;
+}
+
+.ai-realty-message.error {
+    border-left-color: #d63638;
+    background: #fcf0f1;
+}
+
+.ai-realty-message.warning {
+    border-left-color: #dba617;
+    background: #fcf9e8;
+}
+
+.ai-realty-message.info {
+    border-left-color: #2271b1;
+    background: #f0f6fc;
+}
+
+/* Code blocks */
+.ai-realty-code {
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    overflow-x: auto;
+}
+
+/* Badges */
+.ai-realty-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.ai-realty-badge.primary {
+    background: #2271b1;
+    color: white;
+}
+
+.ai-realty-badge.success {
+    background: #00a32a;
+    color: white;
+}
+
+.ai-realty-badge.warning {
+    background: #dba617;
+    color: white;
+}
+
+.ai-realty-badge.error {
+    background: #d63638;
+    color: white;
+}
+
+/* Responsive improvements */
+@media (max-width: 782px) {
+    .ai-realty-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-actions {
+        grid-template-columns: 1fr;
+    }
+}

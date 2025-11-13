@@ -1,0 +1,466 @@
+{
+  "name": "ai-realty-autogen-builder",
+  "version": "1.0.0",
+  "description": "MCP Server for AI Realty Autogen Builder - Autonomous WordPress real estate website builder",
+  "type": "rest",
+  "apiVersion": "v1",
+  "baseUrl": "/wp-json/ai-builder/v1",
+  "authentication": {
+    "type": "api_key",
+    "header": "X-API-Key",
+    "description": "API key for authentication (optional for local development)"
+  },
+  "capabilities": [
+    "build_site",
+    "create_pages",
+    "update_pages",
+    "manage_agents",
+    "sync_leads",
+    "read_status"
+  ],
+  "endpoints": [
+    {
+      "path": "/build-site",
+      "method": "POST",
+      "name": "build_site",
+      "description": "Build complete real estate website from natural language prompt",
+      "parameters": [
+        {
+          "name": "prompt",
+          "type": "string",
+          "required": false,
+          "description": "Natural language description of the site to build (e.g., 'Build a real estate website for Austin agents with listings, blog, and lead capture')"
+        }
+      ],
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "log": "array"
+      },
+      "example": {
+        "request": {
+          "prompt": "Build a real estate website for Austin agents with IDX integration, blog, and contact forms"
+        },
+        "response": {
+          "success": true,
+          "message": "Site built successfully!",
+          "log": []
+        }
+      }
+    },
+    {
+      "path": "/status",
+      "method": "GET",
+      "name": "get_status",
+      "description": "Get current site build status and configuration",
+      "parameters": [],
+      "response": {
+        "build_status": "string",
+        "site_url": "string",
+        "site_title": "string",
+        "total_leads": "number",
+        "total_agents": "number",
+        "total_pages": "number",
+        "integrations": "object"
+      }
+    },
+    {
+      "path": "/create-page",
+      "method": "POST",
+      "name": "create_page",
+      "description": "Create a new WordPress page",
+      "parameters": [
+        {
+          "name": "title",
+          "type": "string",
+          "required": true,
+          "description": "Page title"
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "required": false,
+          "description": "Page content (HTML or Gutenberg blocks)"
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "required": false,
+          "default": "publish",
+          "description": "Page status: publish, draft, private"
+        }
+      ],
+      "response": {
+        "success": "boolean",
+        "page_id": "number",
+        "url": "string"
+      }
+    },
+    {
+      "path": "/update-page",
+      "method": "POST",
+      "name": "update_page",
+      "description": "Update existing page content",
+      "parameters": [
+        {
+          "name": "page_id",
+          "type": "number",
+          "required": false,
+          "description": "Page ID (use page_id OR title)"
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": false,
+          "description": "Page title to find (use page_id OR title)"
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "required": false,
+          "description": "New page content"
+        }
+      ],
+      "response": {
+        "success": "boolean",
+        "page_id": "number",
+        "message": "string"
+      }
+    },
+    {
+      "path": "/delete-page/:id",
+      "method": "DELETE",
+      "name": "delete_page",
+      "description": "Delete a page",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "number",
+          "required": true,
+          "description": "Page ID to delete"
+        }
+      ],
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      }
+    },
+    {
+      "path": "/pages",
+      "method": "GET",
+      "name": "get_pages",
+      "description": "Get all pages",
+      "parameters": [],
+      "response": {
+        "success": "boolean",
+        "pages": "array"
+      }
+    },
+    {
+      "path": "/create-agent",
+      "method": "POST",
+      "name": "create_agent",
+      "description": "Create a new real estate agent profile",
+      "parameters": [
+        {
+          "name": "agent_id",
+          "type": "string",
+          "required": false,
+          "description": "Unique agent identifier (auto-generated if not provided)"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": true,
+          "description": "Agent full name"
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "required": true,
+          "description": "Agent email address"
+        },
+        {
+          "name": "phone",
+          "type": "string",
+          "required": false,
+          "description": "Agent phone number"
+        },
+        {
+          "name": "bio",
+          "type": "string",
+          "required": false,
+          "description": "Agent biography/description"
+        },
+        {
+          "name": "photo_url",
+          "type": "string",
+          "required": false,
+          "description": "URL to agent photo"
+        }
+      ],
+      "response": {
+        "success": "boolean",
+        "agent_id": "string",
+        "message": "string"
+      }
+    },
+    {
+      "path": "/agents",
+      "method": "GET",
+      "name": "get_agents",
+      "description": "Get all real estate agents",
+      "parameters": [],
+      "response": {
+        "success": "boolean",
+        "agents": "array"
+      }
+    },
+    {
+      "path": "/sync-leads",
+      "method": "POST",
+      "name": "sync_leads",
+      "description": "Sync all leads to GoHighLevel CRM",
+      "parameters": [],
+      "response": {
+        "success": "boolean",
+        "total": "number",
+        "synced": "number",
+        "message": "string"
+      }
+    },
+    {
+      "path": "/leads",
+      "method": "GET",
+      "name": "get_leads",
+      "description": "Get all captured leads",
+      "parameters": [
+        {
+          "name": "limit",
+          "type": "number",
+          "required": false,
+          "default": 50,
+          "description": "Number of leads to return"
+        },
+        {
+          "name": "offset",
+          "type": "number",
+          "required": false,
+          "default": 0,
+          "description": "Offset for pagination"
+        }
+      ],
+      "response": {
+        "success": "boolean",
+        "leads": "array",
+        "total": "number"
+      }
+    },
+    {
+      "path": "/settings",
+      "method": "POST",
+      "name": "update_settings",
+      "description": "Update plugin settings",
+      "parameters": [
+        {
+          "name": "default_city",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "default_state",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "claude_api_key",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "ihomefinder_key",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "ghl_api_key",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "ghl_location_id",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      }
+    },
+    {
+      "path": "/execute-prompt",
+      "method": "POST",
+      "name": "execute_prompt",
+      "description": "Execute a natural language prompt for any site modification",
+      "parameters": [
+        {
+          "name": "prompt",
+          "type": "string",
+          "required": true,
+          "description": "Natural language instruction (e.g., 'Add a new page about commercial properties')"
+        }
+      ],
+      "response": {
+        "success": "boolean",
+        "message": "string",
+        "prompt": "string"
+      }
+    }
+  ],
+  "tools": [
+    {
+      "name": "build_site",
+      "description": "Build complete real estate website from scratch. Creates pages, menus, forms, and sample content.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "prompt": {
+            "type": "string",
+            "description": "Optional natural language description of site requirements"
+          }
+        }
+      }
+    },
+    {
+      "name": "update_page",
+      "description": "Update existing WordPress page content or title",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "page_id": {
+            "type": "number",
+            "description": "Page ID to update"
+          },
+          "title": {
+            "type": "string",
+            "description": "New page title"
+          },
+          "content": {
+            "type": "string",
+            "description": "New page content"
+          }
+        }
+      }
+    },
+    {
+      "name": "create_agent",
+      "description": "Create a new real estate agent profile for lead attribution",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Agent name"
+          },
+          "email": {
+            "type": "string",
+            "description": "Agent email"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Agent phone"
+          }
+        },
+        "required": ["name", "email"]
+      }
+    },
+    {
+      "name": "get_status",
+      "description": "Get current site status, build progress, and configuration",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  ],
+  "resources": [
+    {
+      "uri": "/status",
+      "name": "Site Status",
+      "description": "Current build status and site information",
+      "mimeType": "application/json"
+    },
+    {
+      "uri": "/pages",
+      "name": "Pages List",
+      "description": "All WordPress pages",
+      "mimeType": "application/json"
+    },
+    {
+      "uri": "/leads",
+      "name": "Leads Database",
+      "description": "All captured leads from contact forms",
+      "mimeType": "application/json"
+    },
+    {
+      "uri": "/agents",
+      "name": "Agents List",
+      "description": "All real estate agent profiles",
+      "mimeType": "application/json"
+    }
+  ],
+  "prompts": [
+    {
+      "name": "build_real_estate_site",
+      "description": "Build complete real estate website",
+      "arguments": [
+        {
+          "name": "city",
+          "description": "City name (e.g., Austin)",
+          "required": true
+        },
+        {
+          "name": "state",
+          "description": "State abbreviation (e.g., TX)",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "add_property_page",
+      "description": "Add a new property listing page",
+      "arguments": [
+        {
+          "name": "property_details",
+          "description": "Property information",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "update_agent_page",
+      "description": "Update agent biography page",
+      "arguments": [
+        {
+          "name": "agent_name",
+          "description": "Agent name",
+          "required": true
+        },
+        {
+          "name": "bio",
+          "description": "Agent biography",
+          "required": true
+        }
+      ]
+    }
+  ],
+  "documentation": {
+    "url": "https://github.com/yourusername/ai-realty-autogen-builder",
+    "description": "Full documentation and usage examples"
+  },
+  "author": "AI Realty Dev Team",
+  "license": "GPL-2.0+",
+  "homepage": "https://example.com",
+  "repository": "https://github.com/yourusername/ai-realty-autogen-builder"
+}

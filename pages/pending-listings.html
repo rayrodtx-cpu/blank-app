@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pending Listings | Properties Under Contract</title>
+  <meta name="description" content="View our pending listings currently under contract.">
+
+  <!-- iHomefinder Activation Script -->
+  <!-- IMPORTANT: Replace with your actual iHomefinder activation script -->
+  <!-- <script src="YOUR_IHOMEFINDER_ACTIVATION_SCRIPT_URL"></script> -->
+
+  <!-- Global IDX Styles -->
+  <link rel="stylesheet" href="../css/idx-global-styles.css">
+</head>
+<body>
+
+  <!-- Pending Listings Page - Featured Listings (Pending) -->
+
+  <h2>Pending Listings</h2>
+
+  <script>
+    /* Featured Listing widget – Pending status (under contract) */
+    document.currentScript.replaceWith(ihfKestrel.render({
+      "component": "featuredListingSearchWidget",
+      "propertyType": "SFR",
+      "status": "pending",    /* pending listings */
+      "sort": "pd",
+      "resultsPerPage": 15
+    }));
+  </script>
+
+  <!-- Pending featured listings will be shown here. CTA buttons are added via script as well -->
+
+  <!-- CTA Buttons Script -->
+  <script src="../js/idx-cta-buttons.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Property Organizer | Save Your Favorite Listings</title>
+  <meta name="description" content="Sign in to save your favorite properties and organize your home search.">
+
+  <!-- iHomefinder Activation Script -->
+  <!-- IMPORTANT: Replace with your actual iHomefinder activation script -->
+  <!-- <script src="YOUR_IHOMEFINDER_ACTIVATION_SCRIPT_URL"></script> -->
+
+  <!-- Global IDX Styles -->
+  <link rel="stylesheet" href="../css/idx-global-styles.css">
+</head>
+<body>
+
+  <!-- Property Organizer Page - Sign In / Sign Up for Saved Properties -->
+
+  <h2>Property Organizer</h2>
+
+  <script>
+    /* iHomefinder Property Organizer Login widget */
+    document.currentScript.replaceWith(ihfKestrel.render({
+      "component": "propertyOrganizerWidget",
+      "style": "vertical"
+    }));
+  </script>
+
+  <!-- The above widget allows users to sign in to their Property Organizer or create a new account -->
+
+</body>
+</html>

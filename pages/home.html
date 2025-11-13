@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find Your Dream Home | Real Estate Search</title>
+  <meta name="description" content="Search for your dream home with our mobile-friendly real estate search and featured property listings.">
+
+  <!-- iHomefinder Activation Script -->
+  <!-- IMPORTANT: Replace with your actual iHomefinder activation script -->
+  <!-- <script src="YOUR_IHOMEFINDER_ACTIVATION_SCRIPT_URL"></script> -->
+
+  <!-- Global IDX Styles -->
+  <link rel="stylesheet" href="../css/idx-global-styles.css">
+</head>
+<body>
+
+  <!-- Home Page: Hero Search + Featured Listings Carousel -->
+
+  <!-- Hero Search Section -->
+  <div class="hero-search">
+    <h1>Find Your Dream Home</h1>
+    <!-- iHomefinder Quick Search Widget (Universal style) embed code -->
+    <script>
+      document.currentScript.replaceWith(ihfKestrel.render({
+        "component": "quickSearchWidget",
+        "style": "universal"
+      }));
+    </script>
+  </div>
+
+  <!-- Featured Listings Carousel (Gallery Slider widget) embed code -->
+  <div class="featured-listings-carousel">
+    <script>
+      document.currentScript.replaceWith(ihfKestrel.render({
+        "component": "gallerySliderWidget",
+        "rows": 1,
+        "navigation": true,
+        "nav": "top",
+        "auto": true,
+        "maxResults": 25,
+        "status": "active",
+        "featured": true,
+        "effect": "slide"
+      }));
+    </script>
+  </div>
+
+  <!-- The carousel above will display the agent's active featured listings in a swipeable slider -->
+  <!-- "Tour Now" and "More Details" buttons will be injected on listing cards via the global script -->
+
+  <!-- CTA Buttons Script -->
+  <script src="../js/idx-cta-buttons.js"></script>
+
+</body>
+</html>

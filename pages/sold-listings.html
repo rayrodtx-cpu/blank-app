@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sold Listings | Past Sales</title>
+  <meta name="description" content="View our recently sold properties and market success stories.">
+
+  <!-- iHomefinder Activation Script -->
+  <!-- IMPORTANT: Replace with your actual iHomefinder activation script -->
+  <!-- <script src="YOUR_IHOMEFINDER_ACTIVATION_SCRIPT_URL"></script> -->
+
+  <!-- Global IDX Styles -->
+  <link rel="stylesheet" href="../css/idx-global-styles.css">
+</head>
+<body>
+
+  <!-- Sold Listings Page - Featured Listings (Sold) -->
+
+  <h2>Sold Listings</h2>
+
+  <script>
+    /* Featured Listing widget – Sold status */
+    document.currentScript.replaceWith(ihfKestrel.render({
+      "component": "featuredListingSearchWidget",
+      "propertyType": "SFR",
+      "status": "sold",      /* sold listings */
+      "sort": "pd",
+      "resultsPerPage": 15
+    }));
+  </script>
+
+  <!-- Agent's sold listings will display here, styled as cards -->
+  <!-- "Tour Now" is optional for sold listings (can be left for consistency) -->
+
+  <!-- CTA Buttons Script -->
+  <script src="../js/idx-cta-buttons.js"></script>
+
+</body>
+</html>

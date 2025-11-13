@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Featured Listings | Active Properties</title>
+  <meta name="description" content="Browse our featured active listings and find your next home.">
+
+  <!-- iHomefinder Activation Script -->
+  <!-- IMPORTANT: Replace with your actual iHomefinder activation script -->
+  <!-- <script src="YOUR_IHOMEFINDER_ACTIVATION_SCRIPT_URL"></script> -->
+
+  <!-- Global IDX Styles -->
+  <link rel="stylesheet" href="../css/idx-global-styles.css">
+</head>
+<body>
+
+  <!-- Featured Listings Page - Active Featured Listings -->
+
+  <h2>Featured Listings</h2>
+
+  <script>
+    /* iHomefinder Featured Listings widget – Active listings */
+    document.currentScript.replaceWith(ihfKestrel.render({
+      "component": "featuredListingSearchWidget",
+      "propertyType": "SFR",      /* property type filter (SFR = single family; adjust if needed) */
+      "status": "active",         /* show active listings */
+      "sort": "pd",               /* sort by Price descending (pd) */
+      "resultsPerPage": 15
+    }));
+  </script>
+
+  <!-- The above will display the agent's active (for sale) listings -->
+  <!-- "Tour Now" and "More Details" buttons are added to each listing via the global CTA script -->
+
+  <!-- CTA Buttons Script -->
+  <script src="../js/idx-cta-buttons.js"></script>
+
+</body>
+</html>

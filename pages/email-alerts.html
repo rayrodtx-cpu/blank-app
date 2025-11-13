@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Alerts | Get Notified of New Listings</title>
+  <meta name="description" content="Sign up for email alerts to receive notifications when new properties match your criteria.">
+
+  <!-- iHomefinder Activation Script -->
+  <!-- IMPORTANT: Replace with your actual iHomefinder activation script -->
+  <!-- <script src="YOUR_IHOMEFINDER_ACTIVATION_SCRIPT_URL"></script> -->
+
+  <!-- Global IDX Styles -->
+  <link rel="stylesheet" href="../css/idx-global-styles.css">
+</head>
+<body>
+
+  <!-- Email Alerts Page - Sign up for Listing Alerts -->
+
+  <h2>Sign Up for Email Alerts</h2>
+
+  <script>
+    /* iHomefinder Property Organizer widget (used here for new user sign-up) */
+    document.currentScript.replaceWith(ihfKestrel.render({
+      "component": "propertyOrganizerWidget",
+      "style": "vertical"
+    }));
+  </script>
+
+  <!-- This provides a form for users to create an account and set up listing alert preferences -->
+
+</body>
+</html>

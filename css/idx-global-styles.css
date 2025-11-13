@@ -1,0 +1,174 @@
+/* Global IDX Widget Styles - Apple iPhone app aesthetic */
+/* Add this CSS to your iHomefinder IDX Stylesheet settings for consistent iOS-like design */
+
+:root {
+  --ios-blue: #007AFF;  /* iOS default accent color */
+}
+
+/* Use Apple's system font for a native feel */
+body, input, select, textarea, button {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;  /* Base font size for readability on mobile */
+  color: #333;
+  background-color: #f5f5f7;  /* Light gray iOS background */
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: var(--ios-blue);
+  text-decoration: none;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+/* Form fields style: rounded corners, subtle border */
+input[type=text],
+input[type=email],
+input[type=password],
+select,
+textarea {
+  font-size: 16px;
+  padding: 0.5em 0.75em;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Buttons style: iOS-like large tappable buttons */
+button,
+input[type=button],
+input[type=submit] {
+  background-color: var(--ios-blue);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 0.6em 1em;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:active,
+input[type=button]:active,
+input[type=submit]:active {
+  opacity: 0.9;
+}
+
+/* Secondary buttons (e.g. "Cancel") style as outline */
+button.secondary {
+  background: transparent;
+  color: var(--ios-blue);
+  border: 2px solid var(--ios-blue);
+}
+
+/* IDX Listing card styles */
+.ihf-grid-result-container.well {
+  /* Override default "well" container styling */
+  background: #fff !important;
+  border: none !important;
+  border-radius: 12px;
+  padding: 1em;
+  margin: 0.5em 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);  /* subtle shadow for depth */
+}
+
+/* Ensure listing card content (price/title) uses larger font and spacing */
+.ihf-grid-result-container .ihf-grid-result-price,
+.ihf-grid-result-container .ihf-grid-result-address {
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+.ihf-grid-result-container .ihf-grid-result-address {
+  margin-bottom: 0.5em;
+  display: block;
+}
+
+/* Make listing images and other images rounded corners */
+.ihf-grid-result-container img,
+img.ihf-agent-photo,
+img.ihf-listing-photo {
+  border-radius: 8px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Container for CTA buttons on listing cards (injected via JS) */
+.ihf-cta-buttons {
+  margin-top: 0.5em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
+/* Style for Tour Now / More Details buttons */
+.ihf-cta-buttons a {
+  flex: 1 1 45%;  /* two buttons per row on mobile, full width if stacked */
+  text-align: center;
+  text-decoration: none;
+  font-size: 0.95em;
+  font-weight: 600;
+  padding: 0.6em 0;
+  border-radius: 8px;
+}
+
+/* Primary CTA (Tour Now) – filled blue */
+.ihf-cta-buttons .tour-now-btn {
+  background-color: var(--ios-blue);
+  color: #fff;
+}
+
+/* Secondary CTA (More Details) – outlined */
+.ihf-cta-buttons .details-btn {
+  background-color: #ffffff;
+  color: var(--ios-blue);
+  border: 2px solid var(--ios-blue);
+}
+
+/* Page-specific container adjustments */
+.hero-search {
+  text-align: center;
+  padding: 2em 1em;
+  background: #fff;
+}
+
+.hero-search h1 {
+  font-size: 1.4em;
+  font-weight: 700;
+  margin-bottom: 0.5em;
+}
+
+/* Featured Listings Carousel Container */
+.featured-listings-carousel {
+  padding: 1em;
+  background: #f5f5f7;
+}
+
+/* Page Headings */
+h2 {
+  font-size: 1.3em;
+  font-weight: 700;
+  color: #1d1d1f;
+  padding: 1em;
+  margin: 0;
+}
+
+/* Responsive adjustments for larger screens */
+@media (min-width: 768px) {
+  .ihf-cta-buttons a {
+    flex: 1 1 auto;
+  }
+
+  .hero-search h1 {
+    font-size: 2em;
+  }
+
+  h2 {
+    font-size: 1.6em;
+  }
+}

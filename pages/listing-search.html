@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Listings | MLS Property Search</title>
+  <meta name="description" content="Search all available MLS listings with our comprehensive property search tool.">
+
+  <!-- iHomefinder Activation Script -->
+  <!-- IMPORTANT: Replace with your actual iHomefinder activation script -->
+  <!-- <script src="YOUR_IHOMEFINDER_ACTIVATION_SCRIPT_URL"></script> -->
+
+  <!-- Global IDX Styles -->
+  <link rel="stylesheet" href="../css/idx-global-styles.css">
+</head>
+<body>
+
+  <!-- Listing Search Page - Full IDX Search and Results -->
+
+  <h2>Search Listings</h2>
+
+  <script>
+    /* iHomefinder Listing Search widget: renders search form + results */
+    document.currentScript.replaceWith(ihfKestrel.render({
+      "component": "listingSearchWidget"
+    }));
+  </script>
+
+  <!-- The above script will insert the full search bar and results on the page -->
+  <!-- "Tour Now" and "More Details" CTA buttons on each result card will be added by the global script -->
+
+  <!-- CTA Buttons Script -->
+  <script src="../js/idx-cta-buttons.js"></script>
+
+</body>
+</html>

@@ -532,6 +532,153 @@ class RealEstatePageTitleGenerator:
 
         return titles
 
+    def generate_description(self, title: str) -> str:
+        """Generate SEO-friendly description for a page title"""
+        import random
+
+        # Extract key components from title
+        has_pool = "pool" in title.lower()
+        has_garage = "garage" in title.lower()
+        has_fireplace = "fireplace" in title.lower()
+        has_master = "master suite" in title.lower()
+        has_updated = "updated" in title.lower() or "remodeled" in title.lower()
+        has_new = "new" in title.lower() or "construction" in title.lower()
+        has_luxury = "luxury" in title.lower() or "estate" in title.lower()
+
+        # Extract neighborhood if present
+        neighborhood = None
+        for n in self.neighborhoods:
+            if n.lower() in title.lower():
+                neighborhood = n.replace("in ", "").replace("near ", "")
+                break
+
+        # Extract price range
+        price_range = None
+        for p in self.price_ranges:
+            if p in title:
+                price_range = p
+                break
+
+        # Extract bedrooms
+        bedroom_count = None
+        for b in self.bedrooms:
+            if b in title:
+                bedroom_count = b.lower()
+                break
+
+        # Description templates with variations
+        descriptions = []
+
+        # Opening phrases
+        openings = [
+            "Discover amazing",
+            "Browse beautiful",
+            "Explore stunning",
+            "Find your perfect",
+            "Search top-rated",
+            "View available",
+            "Compare the best",
+            "See newly listed",
+            "Tour premier",
+            "Explore exclusive"
+        ]
+
+        # Middle phrases based on attributes
+        middles = []
+        if has_pool:
+            middles.extend([
+                "featuring sparkling pools",
+                "with private swimming pools",
+                "including resort-style pools"
+            ])
+        if has_garage:
+            middles.extend([
+                "with spacious garages",
+                "featuring attached parking"
+            ])
+        if has_new:
+            middles.extend([
+                "brand new construction",
+                "newly built properties",
+                "move-in ready new homes"
+            ])
+        if has_updated:
+            middles.extend([
+                "recently renovated",
+                "beautifully updated",
+                "completely remodeled"
+            ])
+        if has_luxury:
+            middles.extend([
+                "upscale luxury properties",
+                "prestigious estate homes",
+                "high-end residences"
+            ])
+
+        # Default middle if no specific features
+        if not middles:
+            middles = [
+                "quality homes",
+                "well-maintained properties",
+                "desirable residences",
+                "prime real estate",
+                "exceptional properties"
+            ]
+
+        # Closing phrases
+        closings = []
+        if neighborhood:
+            closings.extend([
+                f"located {neighborhood}. Schedule your showing today!",
+                f"{neighborhood}. Contact us for more details.",
+                f"{neighborhood}. Virtual tours available now.",
+                f"{neighborhood}. Start your home search here!",
+                f"{neighborhood}. Expert local agents ready to help."
+            ])
+        else:
+            closings.extend([
+                f"in Dallas, TX. Schedule your tour today!",
+                f"throughout Dallas. Contact us to learn more.",
+                f"in the Dallas area. Start your search now!",
+                f"across Dallas. Professional assistance available.",
+                f"in Dallas, Texas. Find your dream home today!"
+            ])
+
+        # Add price-specific phrases
+        price_phrases = []
+        if price_range:
+            if "Under" in price_range or "Affordable" in price_range:
+                price_phrases.extend([
+                    "Affordable options available.",
+                    "Great value for your budget.",
+                    "Excellent pricing opportunities."
+                ])
+            elif "$1M" in price_range or "Luxury" in price_range:
+                price_phrases.extend([
+                    "Premium properties await.",
+                    "Luxury living redefined.",
+                    "Exceptional quality throughout."
+                ])
+
+        # Build description
+        opening = random.choice(openings)
+        middle = random.choice(middles)
+        closing = random.choice(closings)
+
+        description = f"{opening} {middle} {closing}"
+
+        # Add price phrase if available
+        if price_phrases and random.random() > 0.5:
+            price_phrase = random.choice(price_phrases)
+            description = description.replace(".", f". {price_phrase}", 1)
+
+        # Ensure description isn't too long (ideal is 150-160 chars for SEO)
+        if len(description) > 160:
+            # Try shorter version
+            description = f"{opening} {middle} in Dallas. {random.choice(['Call today!', 'View listings now!', 'Schedule tours!', 'Contact us today!'])}"
+
+        return description
+
 
 def main():
     print("=" * 80)
@@ -578,26 +725,51 @@ def main():
     print(f"✓ Titles saved to JSON: {json_file}")
     print()
 
-    # Save to CSV for spreadsheet use
+    # Save to CSV for spreadsheet use with descriptions
     csv_file = "dallas_real_estate_page_titles.csv"
+    print(f"Generating descriptions for {len(sorted_titles):,} titles...")
+    print("This may take a few moments...")
+
     with open(csv_file, 'w', encoding='utf-8') as f:
-        f.write("ID,Page Title,URL Slug\n")
+        f.write("ID,Page Title,URL Slug,Description\n")
+
+        # Set random seed for reproducibility
+        import random
+        random.seed(42)
+
         for i, title in enumerate(sorted_titles, 1):
+            # Generate URL slug
             url_slug = title.lower().replace(' ', '-').replace(',', '').replace('/', '-')
             url_slug = ''.join(c for c in url_slug if c.isalnum() or c == '-')
             url_slug = '-'.join(filter(None, url_slug.split('-')))  # Remove multiple dashes
-            f.write(f'{i},"{title}","{url_slug}"\n')
 
-    print(f"✓ Titles saved to CSV: {csv_file}")
+            # Generate description
+            description = generator.generate_description(title)
+
+            # Escape quotes in description
+            description = description.replace('"', '""')
+
+            # Write CSV row
+            f.write(f'{i},"{title}","{url_slug}","{description}"\n')
+
+            # Progress indicator every 10,000 titles
+            if i % 10000 == 0:
+                print(f"  Generated {i:,} descriptions...")
+
+    print(f"✓ Titles saved to CSV with descriptions: {csv_file}")
     print()
 
-    # Display sample titles
-    print("Sample titles (first 50):")
+    # Display sample titles with descriptions
+    print("Sample titles with descriptions (first 20):")
     print("-" * 80)
-    for title in sorted_titles[:50]:
-        print(f"  • {title}")
-    print()
-    print(f"... and {len(sorted_titles) - 50:,} more titles!")
+    import random
+    random.seed(42)
+    for title in sorted_titles[:20]:
+        description = generator.generate_description(title)
+        print(f"  Title: {title}")
+        print(f"  Description: {description}")
+        print()
+    print(f"... and {len(sorted_titles) - 20:,} more titles with descriptions!")
     print()
 
     # Statistics
